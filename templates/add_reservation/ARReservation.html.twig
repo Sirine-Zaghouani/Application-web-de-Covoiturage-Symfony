@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}   Mes reservation {% endblock %}
+{% block content %}
+    <div style="margin-left: 100px">
+        <div class="heading_container">
+            <h2>
+                Les Réservations
+            </h2>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div style="margin-bottom:500px">
+        <div style="margin-left: 150px">
+
+            {% for r in Reservations %}
+                {% if  r.getEtat==0 %}
+                <div class="client_box b-1" style="width: 500px";>
+                    <td><h6><strong>Etat de la reservation : en attente</strong> </h6></td>
+                    <td><h6><strong>Le trajet réservé :</strong> {{ r.getAnnonce.getLieuDepart}} <strong> Vers </strong> {{ r.getAnnonce.getLieuArrivee}}  </h6></td>
+                    <td><h6><strong> Date de départ :</strong>{{ r.getAnnonce.getDateDepart|date(" j F Y")}} <strong> Heure </strong> {{ r.getAnnonce.getHeureDepart|date(" g:i a")}}  </h6></td>
+                    <td><h6><strong>L'utilisateur qui a effectué la réservation : </strong>  </h6></td>
+                    <td><h6> Nom et prenom :{{ r.getUser.getnom }}  {{ r.getUser.getPrenom }} ( {{ r.getUser.getCivilite }}) </h6></td>
+                    <td><h6> Adresse : {{ r.getUser.getAdresse }} </h6></td>
+
+                    <button type="button" class="btn btn-success" onclick="window.location.href = '{{ path("AcceptReservation",{'id': r.getId}) }}';" > Accepter </button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.href = '{{ path("RefuseReservation",{'id': r.getId}) }}';" > Refuser </button>
+                    <br>
+                    <hr>
+                    <br>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

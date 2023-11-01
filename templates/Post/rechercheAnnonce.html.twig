@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <section class="about_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="detail-box" style="margin-top:-300px">
+                        <div class="heading_container">
+                            <h2>
+                                Trouvez un covoiturage
+                            </h2>
+
+                        </div>
+                        <p>
+                            Covoiturez sur tous vos types de trajets sans aucune commission.
+                        </p>
+                        <form action="" method="post">
+                            <div class="row" action="" method="POST" >
+                                <div class="col">
+                                    <input type="text" class="form-control" name="adr_depart" placeholder="Adresse de départ">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" name="adr_arrivee" placeholder="Adresse d'arrivée">
+                                </div>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-dark">Lancer ma recherche</button>
+                            <br>
+                        </form>
+                    </div>
+                    {%  if annonces is empty %}
+                        Aucune annonce trouvée
+
+                    {% else %}
+                            {% for a in annonces %}
+                                <div class="container">
+                                    <div class="client_container layout_padding2">
+                                        <div class="client_box b-1" style="width: 500px">
+                                            <h5>
+                                                <strong><i class="fa fa-user"></i>  {{ a.getUser.getNom }} {{ a.getUser.getPrenom}} </strong>({{ a.getUser.getProfession}})
+                                            </h5>
+                                            <hr>
+                                            <td>Lieu de départ: {{ a.getLieuDepart }}</td><br>
+                                            <td>Lieu de d'arrivée : {{ a.getLieuArrivee }}</td><br>
+                                            <td>Date de départ : {{ a.getDateDepart|date }}</td><br>
+                                            <td>Heure de départ: {{ a.getHeureDepart|date}}</td><br>
+                                            <td>Le nombre de places disponibles :  {{ a.getNombrePlace }}</td><br>
+                                            <td>Prix du place : {{ a.getPrix}} DT</td><br>
+                                            <td><h6><strong style="color: red">Remarque : </strong>{{ a.getDescription }}</h6></td>
+                                            <hr>
+                                            {% if app.user %}
+                                                <button type="button" style="margin-left:20px" class="btn btn-success" onclick="window.location.href = '';" ><i class="fa-sharp fa-solid fa-check-to-slot">  Réserver</i></button>
+                                            {% else %}
+                                                <button type="button" style="margin-left:20px" class="btn btn-success" onclick="window.location.href = '{{ path("app_login") }}';" ><i class="fa-sharp fa-solid fa-check-to-slot">  Réserver</i></button>
+                                            {% endif %}
+                                            <br>
+                                            <hr>
+                                           <h4>Commentaire : </h4>
+                                            {% for w in a.avis %}
+                                                <td> <strong> {{ w.getUser.getPrenom}} {{ w.getUser.getNom }} </strong></td><br>
+                                                <td> {{ w.getContenu}}  </td>
+                                                <br>
+                                                <hr>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                    {% endif %}
+
+                </div>
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <img src="assets/images/images.png" style="width:600px ; height: 500px; margin-left: 100px; margin-text-outline: -300px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mon profil{% endblock %}
+{% block content %}
+
+
+    <section class="client_section layout_padding-bottom">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Paramètres généraux du compte
+                </h2>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="client_container layout_padding2">
+                <div class="client_box b-1" >
+                    <h5>
+                        Modifier mes informations personnelles
+                    </h5>
+                    <hr>
+                    {{ form(form_infos) }}
+                    <hr>
+                </div>
+                <div class="client_box b-2" >
+                    <h5>
+                        Modifier mon mot de passe
+                    </h5>
+                    <hr>
+                    {{ form(form_mot_passe) }}
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Supprimer mon compte
+                </h2>
+
+            </div>
+        </div>
+        <div class="client_box b-1" >
+            <h5>
+                supprimer mon compte
+            </h5>
+            <hr>
+            <p> Êtes-vous sûr de vouloir supprimer votre compte ? </p>
+            {{ form(delete_account) }}
+            <hr>
+
+        </div>
+    </section>
+
+    <div>
+
+    </div>
+{% endblock %}

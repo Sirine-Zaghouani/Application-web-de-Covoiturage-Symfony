@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    {{ include('base1.html.twig') }}
+    <section class="client_section layout_padding-bottom" style="margin-left: 350px">
+        <div class="container">
+            <div class="client_container layout_padding2">
+                <div class="client_box b-1" style="width: 700px">
+                    <div class="container">
+                        <div class="heading_container">
+                            <h2>
+                                Modifier l'avis
+                            </h2>
+                        </div>
+                    </div>
+                    <hr>
+                    {{ form(editFormAvis_demande) }}
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

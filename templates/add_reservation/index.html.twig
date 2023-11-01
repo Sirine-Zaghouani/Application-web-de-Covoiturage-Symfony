@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}   Mes reservation {% endblock %}
+{% block content %}
+<div style="margin-left: 100px">
+    <div class="heading_container">
+        <h2>
+            Mes Réservations
+        </h2>
+    </div>
+    </div>
+    <br>
+    <br>
+    <div style="margin-bottom:500px">
+    <div style="margin-left: 150px">
+
+        {% for r in MesReservation  %}
+        <div class="client_box b-1" style="width: 500px; ">
+            {% if r.getEtat==0  %}
+                <td><h6><strong>etat : en attente</strong> </h6></td>
+            {% elseif r.getEtat==1 %}
+                <td><h6><strong>etat : accepter </strong></h6></td>
+            {% else %}
+                <td><h6><strong>etat : refuser </strong></h6></td>
+            {% endif %}
+            <td><h6><strong>Nom de conducteur: </strong>{{ r.getAnnonce.getUser.getNom }} {{ r.getAnnonce.getUser.getPrenom }}</h6></td>
+            <td><h6><strong> Trajet: </strong> {{ r.getAnnonce.getLieuDepart}}  vers  {{ r.getAnnonce.getLieuArrivee}}  </h6></td>
+            <td><h6><strong> Date de départ :</strong>{{ r.getAnnonce.getDateDepart|date(" j F Y")}} <strong> Heure </strong> {{ r.getAnnonce.getHeureDepart|date(" g:i a")}}  </h6></td>
+            <td><h6><strong> Prix : </strong>{{ r.getAnnonce.getPrix }} DT </h6></td>
+            {% if r.getEtat==0  %}
+            <button type="button" class="btn btn-danger" onclick="window.location.href = '{{ path("ReservationDelete",{'id': r.getId}) }}';" ><i class="fa fa-trash can"> Annuler</i></button>
+            {% else %}
+                <button type="button" class="btn btn-danger" onclick="window.location.href = '{{ path("ReservationDelete",{'id': r.getId}) }}';" ><i class="fa fa-trash can"> Supprimer</i></button> <br>
+                <td><h6><strong> Contact </strong>{{ r.getUser.getTelephone }} </h6></td>
+           {% endif %}
+            <br>
+        </div>
+            <br>
+            <hr>
+        {% endfor %}
+
+    </div>
+
+    </div>
+
+{% endblock %}

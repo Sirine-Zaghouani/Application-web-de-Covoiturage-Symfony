@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+{% block title %}les publications {% endblock %}
+{% block content %}
+    <section class="client_section layout_padding-bottom" style="margin-bottom:1200px">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Les publications disponibles
+                </h2>
+            </div>
+            <div style="margin-bottom:500px">
+                <div style="margin-left: 150px;margin-top: 50px">
+                    <h1 style="color:#24d278">Les annonces</h1>
+                    <br>
+                </div>
+                {% for a in LesAnnonces   %}
+                    <div class="container">
+                        <div class="client_container layout_padding2">
+                            <div class="client_box b-1" style="width: 500px">
+                                <h5>
+                                    <strong><i class="fa fa-user"></i>  {{ a.getUser.getNom }} {{ a.getUser.getPrenom}} </strong>({{ a.getUser.getProfession}})
+                                </h5>
+                                <hr>
+                                <td>Lieu de départ: {{ a.getLieuDepart }}</td><br>
+                                <td>Lieu de d'arrivée : {{ a.getLieuArrivee }}</td><br>
+                                <td>Date de départ : {{ a.getDateDepart|date(" j F Y")}}</td><br>
+                                <td>Heure de départ: {{ a.getHeureDepart|date(" g:i a")}}</td><br>
+                                <td>Le nombre de places disponibles :  {{ a.getNombrePlace }}</td><br>
+                                <td>Prix du place : {{ a.getPrix}} DT</td><br>
+                                <td><h6><strong style="color: red">Remarque : </strong>{{ a.getDescription }}</h6></td>
+                                <hr>
+                                <strong>Tel:  {{ a.getUser.getTelephone }} - Mail:  {{ a.getUser.getEmail}}</strong>
+                                <button type="button" class="btn btn-success" onclick="window.location.href = '{{ path("add_reservation",{'id': a.getId}) }}';" ><i class="fa fa-plus"> Réserver </i></button>
+                                <hr>
+
+
+                                {% for w in a.avis %}
+                                    <td> <strong>{{ w.getUser.getNom }} {{ w.getUser.getPrenom}}</strong></td><br>
+                                    <td> {{ w.getContenu}}  {% if app.user.id == w.user.id %}
+                                            <div style="margin-left: 350px">
+                                            <button type="button" class="btn btn-info" onclick="window.location.href = '{{ path("Avis_Update",{'id': w.getId}) }}';" ><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn btn-danger" onclick="window.location.href = '{{ path("Avis_Delete",{'id': w.getId}) }}';" ><i class="fa fa-trash can"></i></button></div>
+                                {% endif %}</td><br>
+                                    <td><strong>Date de création :</strong> {{ w.getDateC |date("j F Y") }}</td><br>
+                                    <hr>
+                                {% endfor %}
+                                <button type="button" class="btn btn-warning" onclick="window.location.href = '{{ path("add_avis",{'id': a.getId}) }}';" ><i class="fa fa-edit">  Comment </i></button>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div style="margin-bottom:0px;margin-left:600px;margin-top:-3920px">
+                <div style="margin-left: 150px;margin-top: 50px">
+                    <h1 style="color:#24d278">Les demandes</h1>
+                    <br>
+                </div>
+                {% for d in LesDemandes %}
+                    <div class="container">
+                        <div class="client_container layout_padding2">
+                            <div class="client_box b-1" style="width: 500px">
+                                <h5>
+                                    <strong><i class="fa fa-user"></i> {{ d.getUser.getNom }} {{ d.getUser.getPrenom}} </strong>({{ d.getUser.getProfession}})
+                                </h5>
+                                <hr>
+                                <td>Lieu de départ: {{ d.getLieuDepart }}</td><br>
+                                <td>Lieu de d'arrivée : {{ d.getLieuArrivee }}</td><br>
+                                <td>Date de départ : {{ d.getDateDepart|date(" j F Y") }}</td><br>
+                                <td>Heure de départ: {{ d.getHeureDepart|date(" g:i a")}}</td><br>
+                                <td>Le nombre de places disponibles :  {{ d.getNombrePlace }}</td><br>
+                                <td><h6><strong style="color: red">Remarque : </strong>{{ d.getDescription }}</h6></td>
+                                <hr>
+                                <strong>Tel:  {{ d.getUser.getTelephone }} - Mail:  {{ d.getUser.getEmail}}</strong>
+
+
+
+                                {% for q in d.avisDemandes %}
+                                    <hr>
+                                    <td> <strong>{{ q.getUser.getNom }} {{ q.getUser.getPrenom}}</strong></td><br>
+                                    <td> {{ q.getContenu}} </td><br>
+                                    <td><strong>Date de création :</strong> {{ q.getDateC |date("F j, Y, g:i a") }}</td><br>
+                                    <br>
+                                    {% if app.user.id == q.user.id %}
+                                        <button type="button" class="btn btn-info" onclick="window.location.href = '{{ path("Avis_demande_Update",{'id': q.getId}) }}';" ><i class="fa fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger" onclick="window.location.href = '{{ path("Avis_Delete_demande",{'id': q.getId}) }}';" ><i class="fa fa-trash can"></i></button>
+                                    {% endif %}
+                                    <hr>
+                                {% endfor %}
+                                <button type="button" class="btn btn-warning" onclick="window.location.href = '{{ path("add_avis_demande",{'id': d.getId}) }}';" ><i class="fa fa-edit">  Comment </i></button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

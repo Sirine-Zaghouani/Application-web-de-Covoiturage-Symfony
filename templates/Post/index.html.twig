@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter Annonce{% endblock %}
+
+{% block content %}
+
+<section class="client_section layout_padding-bottom">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Ajouter une publication
+            </h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="client_container layout_padding2">
+            <div class="client_box b-1" style="width: 500px">
+
+                <h4> <strong>Ajouter Annonce</strong><br></h4>
+                    Je suis conducteur(rice)
+
+                <hr>
+                <div>
+                    {{ form(formAnnonce) }}
+                </div>
+                <hr>
+            </div>
+            <div class="client_box b-2" style="width: 500px;margin-left: 100px">
+                <h4> <strong>Ajouter Demande</strong><br></h4>
+                Je suis passager(ère)
+                <hr>
+                {{ form(formDemande) }}
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mon compte{% endblock %}
+{% block content %}
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
+    <div>
+        <img src="assets/images/image5.png" alt="" style="width:100%;height:50%;margin-top: -50px"/>
+        <div class="text" style=" position: absolute;
+    text-align: center;
+    font-family: Georgia;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 15%;
+    color: black;
+    width: 70%;">
+            <h1>Publier une annonce</h1>
+            Commencer votre annonce <br>
+            <br>
+            <input type="radio" id="contactChoice1"
+                   name="contact" value="conducteur" checked>
+            <label for="contactChoice1">Je suis conducteur(rice)  </label>
+
+            <input type="radio" id="contactChoice2"
+                   name="contact" value="passager" style="margin-left: 40px">
+            <label for="contactChoice2">Je suis passager(ère)  </label>
+            <section style="margin-top: 20px">
+                <div >
+                    <div style="margin-left: 350px">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-box">
+
+                                    <form>
+                                        <div class="row">
+                                            <div class="col">
+                                                <input style="width: 300px" type="text" class="form-control" placeholder="Adresse de départ">
+                                            </div>
+                                            <div class="col">
+                                                <input  type="text" class="form-control" placeholder="Adresse d'arrivée">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <a href="">
+                                        Lancer ma recherche
+                                    </a>
+                                    <br/>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}

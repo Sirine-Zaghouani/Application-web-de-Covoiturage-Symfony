@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title %}   Mes publications {% endblock %}
+{% block content %}
+<div style="margin-left: 100px">
+        <div class="heading_container">
+            <h2>
+                Mes publications
+            </h2>
+        </div>
+    <br>
+    <button type="button" class="btn btn-success"onclick="window.location.href = '{{ path('add_annonce') }}';" ><i class="fa fa-plus">   Ajouter une publication</i> </button>
+    <br>
+    <br>
+</div>
+    <div style="margin-bottom:500px">
+    <div style="margin-left: 150px">
+        <h1 style="color:#24d278">Liste des annonces</h1>
+    <br>
+
+        {% for a in MesAnnonces  %}
+        <div class="client_box b-1" style="width: 500px; ">
+            <td><h6><strong>Lieu de départ : </strong> {{ a.getLieuDepart }}</h6></td>
+            <td><h6><strong>Lieu de d'arrivée : </strong>{{ a.getLieuArrivee }}</h6></td>
+            <td><h6><strong>Date de départ : </strong>{{ a.getDateDepart|date }}</h6></td>
+            <td><h6><strong>Heure de départ : </strong>{{ a.getHeureDepart|date}}</h6></td>
+            <td><h6><strong>Le nombre de places disponibles : </strong>{{ a.getNombrePlace }}</h6></td>
+            <td><h6><strong>Prix du place : </strong>{{ a.getPrix}} DT</h6></td>
+            <td><h6><strong>Remarque : </strong>{{ a.getDescription }}</h6></td>
+            <br>
+            <button type="button" class="btn btn-info" onclick="window.location.href = '{{ path("AnnonceUpdate",{'id': a.getId}) }}';" ><i class="fa fa-edit">   Modifier</i></button>
+            <button type="button" class="btn btn-danger" onclick="window.location.href = '{{ path("AnnonceDelete",{'id': a.getId}) }}';" ><i class="fa fa-trash can">    Supprimer</i></button>
+           <br>
+            <br>
+            <hr>
+        </div>
+        {% endfor %}
+        <br>
+
+    </div>
+    <div style="margin-left: 820px;margin-top: -1650px;margin-right: 150px">
+    <h1 style="color:#24d278">Liste des demandes</h1>
+        <br>
+    {% for d in MesDemandes %}
+    <td><h6><strong>Lieu de départ : </strong> {{ d.getLieuDepart }}</h6></td>
+    <td><h6><strong>Lieu de d'arrivée : </strong>{{ d.getLieuArrivee }}</h6></td>
+    <td><h6><strong>Date de départ : </strong>{{ d.getDateDepart|date }}</h6></td>
+        <td><h6><strong>Heure de départ : </strong>{{ d.getHeureDepart|date}}</h6></td>
+        <td><h6><strong>Prix du place : </strong>{{ d.getNombrePlace }}</h6></td>
+    <td><h6><strong>Remarque : </strong>{{ d.getDescription }}</td>
+        <br>
+        <br>
+        <button type="button" class="btn btn-info" onclick="window.location.href = '{{ path("DemandeUpdate",{'id': d.getId}) }}';" ><i class="fa fa-edit">  Modifier</i></button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href = '{{ path("DemandeDelete",{'id': d.getId}) }}';" ><i class="fa fa-trash can">    Supprimer</i></button>
+        <br>
+        <br>
+        <hr>
+    {% endfor %}
+    </div>
+    </div>
+
+{% endblock %}
